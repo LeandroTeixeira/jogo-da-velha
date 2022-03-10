@@ -1,4 +1,4 @@
-# jogo-da-velha
+# Jogo da Velha
 Jogo da Velha desenvolvido na linguagem C para a displina Algoritmos e Estruturas de Dados II. Possui a implementação de uma inteligência artificial desenvolvida pelo algoritmo minimax.
 
 ## Introdução:
@@ -68,7 +68,6 @@ equivalente ao parâmetro c. Retorna a primeira aparição dele; caso ele não e
 retorna erro. Para retornar corretamente o endereço do elemento, o valor correspondente
 à linha é multiplicado por 10 e somado à coluna. Por exemplo, se o elemento está na
 posição [2][2] o valor retornado é 22.
-
 A pesquisa usada é a pesquisa sequencial. Os valores são comparados um a um
 com o parâmetro e quando o sucesso acontece o valor é retornado.
 
@@ -115,8 +114,7 @@ FALSE caso contrário. Difere da função anterior ao passo em que não se impor
 valores são iguais a um terceiro parâmetro, apenas entre si.
 
 ## Programa Principal – Jogo da velha
-Assim como o caça-níqueis, este programa pega os parâmetros a partir da linha
-de comando e, fazendo uma análise, decide o que executa.
+Este programa pega os parâmetros a partir da linha de comando e, fazendo uma análise, decide o que executa.
 
 Se o parâmetro for inválido ou não existir, o jogo padrão é o humano x máquina.
 Neste caso, a máquina joga usando o algoritmo recursivo minimax para que seja
@@ -143,9 +141,8 @@ teoria de jogos para solucionar jogos determinísticos, especialmente aqueles co
 número relativamente pequeno de combinações possíveis, tais como dama e jogo da
 velha. Em jogos estocásticos, como o de baralho, e determinísticos porém com ordem
 de 10^10 combinações possíveis, tais como xadrez, ele também pode ser usado mas
-precisa sofrer ajustes para prever uma jogada tanto quando a informação não é perfeita
-quanto quando só é possível prever no máximo 15 jogadas à frente ao invés de quantas
-forem necessárias.
+precisa sofrer ajustes para prever uma jogada no cenário de a informação não ser perfeita
+e no cenário de não ser possível prever todas as combinações finais em tempo hábil.
 
 ### As funções contidas na main são as seguintes:
 _void novoJogo(Tabuleiro *T)_: Recebe um tabuleiro, inicializa ele com “_” em todas as
@@ -225,54 +222,54 @@ momento for encontrado um erro, retorna e executa a função Um. Caso contrário
 arquivo é lido sequencialmente até encontrar um caractere válido (no caso, os números
 0, 1 e 2), ignorando todos os outros. O valor é então convertido para inteiro e salvo
 numa variável. A partir disso, a execução prossegue como nas funções anteriores.
-Organização do Código, Decisões de Implementação e Detalhes Técnicos
+
+## Organização do Código, Decisões de Implementação e Detalhes Técnicos
+
 Ao fazer o código, como já mencionado, eu optei por usar constantes para
 identificar casos em que o valor retornado significava verdadeiro, falso ou erro. Desta
 forma, eu não teria dificuldades de diferenciar, ao corrigir o código, um valor de retorno
 igual a zero e um valor de retorno igual a falso, que, na linguagem C, são equivalentes.
-No caça-níqueis, apesar de os símbolos possíveis serem pré-definidos, o
-programa é capaz de reconhecer e julgar os valores independente da simbologia
-utilizada. Também optei por, em caso de erro encontrado na leitura de arquivo,
-prosseguir com uma execução independente.
-No jogo da velha, apesar de não ter sido requisitado, montei um algoritmo que
+
+No jogo da velha, montei um algoritmo que
 soluciona ele, o que implica em uma complexidade maior do algoritmo como um todo.
 
 ## Análise de Complexidade - TAD:
 _void SetTamanho(Tabuleiro *T, int n)_:Executa algumas operações com O(1) para alocar
-a matriz e depois itera pelas n linhas para aloca-las dinamicamente, logo, O(n).
-int GetTamanho(Tabuleiro T): Retorna apenas um valor independente dos parâmetros,
-logo, O(1).
+a matriz e depois itera pelas n linhas para aloca-las dinamicamente, logo, __O(n)__.
+
+_int GetTamanho(Tabuleiro T)_: Retorna apenas um valor independente dos parâmetros,
+logo, __O(1)__.
 
 _void LiberaTamanho(Tabuleiro *T)_: Similar à setTamanho, itera pelas n linhas
 liberando a memória alocada e depois libera a memória da matriz em si, logo,
-complexidade O(n).
+__complexidade O(n)__.
 
 _void SetElemento(Tabuleiro *T, int i, int j, char c)_: Executa apenas uma operação de
-atribuição que independe dos parâmetros. Complexidade O(1).
+atribuição que independe dos parâmetros. __Complexidade O(1)__.
 
 _void MarcaTodos(Tabuleiro *T, char c)_: Itera pelas n linhas e n colunas da matriz para
-marcar todos os valores. Complexidade O(n²).
+marcar todos os valores. __Complexidade O(n²)__.
 
 _char GetElemento(Tabuleiro T, int i, int j)_: Executa apenas uma operação de retorno que
-independe dos parâmetros. Complexidade O(1).
+independe dos parâmetros. __Complexidade O(1)__.
 
 _int TestaDiferente(Tabuleiro T, int i)_: Pega uma linha de tamanho n e itera sobre ela
-comparando seus elementos. Complexidade O(n).
+comparando seus elementos. __Complexidade O(n)__.
 
 _void Imprime(Tabuleiro T)_: Itera pelas n linhas e n colunas imprimindo seus valores.
-Complexidade O(n²).
+__Complexidade O(n²)__.
 
 _int procuraElemento(Tabuleiro T,char c)_: Função interessante, itera sobre as linhas e
 colunas até encontrar um valor específico e retorna ele. Na melhor das hipóteses o valor
 está na primeira posição, o que resultaria numa complexidade O(1). Na pior ele está na
 última, o que resultaria numa complexidade O(n²). Já que a notação O especifica um
 limite, a complexidade desta função deve ser analisada usando o pior caso, o que resulta
-em O(n²).
+em __O(n²)__.
 
 _int TestaLinha(Tabuleiro T, int i, char c), int TestaColuna(Tabuleiro T, int j, char c), int
 testaLinha(Tabuleiro T, int i), int testaColuna(Tabuleiro T, int j)_: Todas essas funções
 fazem essencialmente a mesma coisa: iteram sobre uma linha/coluna comparando os
-valores entre si. Logo, todas elas possuem um comportamento O(n) no pior caso.
+valores entre si. Logo, todas elas possuem um comportamento __O(n)__ no pior caso.
 
 _int TestaDiagonalED(Tabuleiro T, char c), int TestaDiagonalDE(Tabuleiro T, char c),
 int testaDiagonalED(Tabuleiro T),i nt testaDiagonalDE(Tabuleiro T)_: De forma análoga
@@ -282,43 +279,44 @@ pode ser feita. Estas funções iteram simultaneamente sobre as linhas e as colu
 funções testaDiagonalED fazem uma iteração com apenas uma variável de controle
 enquanto as TestaDiagonalDE fazem uma iteração com duas variáveis de controle. Em
 ambos os casos, são feitas apenas O(n) comparações, o que implica em complexidade
-final O(n).
+final __O(n)__.
 
 ## Análise de complexidade – Jogo da velha
 _void novoJogo(Tabuleiro *T)_: É a soma da complexidade da função marcaTodos com a
-Imprime. O(n²) + O(n²)= O(n²).
+Imprime. __O(n²) + O(n²)= O(n²)__.
 
 _int isVencedor(Tabuleiro T,char c)_: Soma das funções testaDiagonal, testaLinha e
-testaColuna, todas O(n), por consequência, esta também é O(n).
-void setVencedor(char *c,Tabuleiro *T): Executa função constante e a novoJogo que é
-O(n²). Logo, esta também é O(n²).
+testaColuna, todas O(n), por consequência, esta também é __O(n)__.
+
+_void setVencedor(char *c,Tabuleiro *T)_: Executa função constante e a novoJogo que é
+O(n²). Logo, esta também é __O(n²)__.
 
 _int verificarVencedor(Tabuleiro *T)_: Executa várias vezes a função isVencedor e
-algumas operações constantes. 3*O(n) + C = O(n).
+algumas operações constantes. __3*O(n) + C = O(n)__.
 
 _int isVelha(Tabuleiro T)_: Itera sobre a matriz inteira atrás dos valores especificados.
-Iterar pela matriz é fazer n vezes n comparações, logo, complexidade O(n²).
+Iterar pela matriz é fazer n vezes n comparações, logo, __complexidade O(n²)__.
 
 _int jogar(Tabuleiro *T,int lin, int col, char c)_: Faz verificações de dados de custo
-constant e imprime uma vez, operação O(n²). Complexidade O(n²).
+constant e imprime uma vez, operação O(n²). __Complexidade O(n²)__.
 
 _double minimax(Tabuleiro *T,int player)_: Não irei demonstrar, mas a complexidade da
-minimax é O(n²).
+minimax é __O(n²)__.
 
 _void Jogar(Tabuleiro *T)_: Executa funções de custo constante, a minimax que é O(n²) e
-a jogar que é O(n²). Complexidade O(n²).
+a jogar que é O(n²). __Complexidade O(n²)__.
 
 _void Um(Tabuleiro *T)_: Executa, no máximo, n² jogadas. Cada jogada é composta de
 uma invocação da função jogar, cuja complexidade é O(n²). No total, temos n²
-execuções de algo que é O(n²), totalizando O(n^4).
+execuções de algo que é O(n²), totalizando __O(n^4)__.
 
 _void Dois(Tabuleiro *T)_: Executa, no máximo, n² jogadas. Cada jogada é composta de
 uma invocação da função jogar, cuja complexidade é O(n²). No total, temos n²
-execuções de algo que é O(n²), totalizando O(n^4).
+execuções de algo que é O(n²), totalizando __O(n^4)__.
 
 _int Tres(Tabuleiro *T,char *file)_: Análoga às anteriores, executa n² vezes a função jogar
-na pior das hipóteses, o que implica O(n^4).
+na pior das hipóteses, o que implica __O(n^4)__.
 
 _int main(int argc, char *argv[])_: Não importa qual caminho seja tomado, no fim das
 contas uma função O(n^4) será executada. Visto que o que importa é a maior
-complexidade, temos uma main que é O(n^4).
+complexidade, temos uma main que é __O(n^4)__.
